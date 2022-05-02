@@ -10,7 +10,7 @@ const thoughtController = {
             })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thoughts with this ID!' });
+                    res.status(404).json({ message: 'No user with this ID!' });
                     return;
                 }
                 res.json(dbThoughtData)
@@ -36,7 +36,7 @@ const thoughtController = {
             .select('-__v')
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thoughts with this ID!' });
+                    res.status(404).json({ message: 'No thought with this ID!' });
                     return;
                 }
                 res.json(dbThoughtData)
@@ -53,7 +53,7 @@ const thoughtController = {
             .select('-___v')
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thoughts with this ID!' });
+                    res.status(404).json({ message: 'No thought with this ID!' });
                     return;
                 }
                 res.json(dbThoughtData);
@@ -65,7 +65,7 @@ const thoughtController = {
         Thought.findOneAndDelete({ _id: params.id })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thoughts with this ID!' });
+                    res.status(404).json({ message: 'No thought with this ID!' });
                     return;
                 }
                 res.json(dbThoughtData);
@@ -80,7 +80,7 @@ const thoughtController = {
             .select('-__v')
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thoughts with this ID!' });
+                    res.status(404).json({ message: 'No thought with this ID!' });
                     return;
                 }
                 res.json(dbThoughtData);
@@ -93,7 +93,7 @@ const thoughtController = {
         Thought.findOneAndUpdate({ _id: params.thoughtId }, { $pull: { reactions: { reactionId: params.reactionId } } }, { new: true })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thoughts with this particular ID!' });
+                    res.status(404).json({ message: 'No thought with this ID!' });
                     return;
                 }
                 res.json(dbThoughtData);
