@@ -41,7 +41,7 @@ Reaction
 * Add a reaction: `POST /api/thoughts/:thoughtId/reactions`
 * Delete a reaction: `DELETE /api/thoughts/:thoughtId/reactions/:reactionId`
 
-You can watch a tutorial [here](https://youtu.be/tY_9tj_SWzI)
+You can watch a walkthrough [here](https://youtu.be/tY_9tj_SWzI)
 
 ## License 
 To read the ISC license click [here](https://opensource.org/licenses/ISC)
