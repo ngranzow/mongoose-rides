@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 // Set up User Controller
 const userController = {
@@ -17,7 +17,7 @@ const userController = {
             .populate({ path: 'friends', select: '-__v' })
             .select('-__v')
             // .sort({_id: -1})
-            .then(dbUsersData => res.json(dbUsersData))
+            .then(dbUserData => res.json(dbUserData))
             .catch(err => {
                 console.log(err);
                 res.status(500).json(err);
@@ -62,7 +62,15 @@ const userController = {
                     res.status(404).json({ message: 'No user with this ID!' });
                     return;
                 }
-                res.json(dbUserData);
+                // remove the user from friends
+                User.updateMany({ _id: { $in: dbUserData.friends } }, { $pull: { friends: params.id } })
+                .then(() => {
+                    // remove any thoughts from this user
+                    Thought.deleteMany({ username: dbUserData.username })
+                    .then(() => { res.json({ message: 'User has been successfully deleted!' }) })
+                    .catch(err => res.status(400).json(err));
+                })
+                .catch(err => res.status(400).json(err));
             })
             .catch(err => res.status(400).json(err));
     },
